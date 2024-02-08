@@ -1,0 +1,110 @@
+$W: 25px;
+$borderW: 20px;
+$divW: calc(0.8 * $W );
+$colorP1: #333;
+$colorP2: #ccc;
+$t: .75s;
+
+:host {
+
+    section.info {
+        display: flex;
+        flex-flow: row;
+        margin-top: .5em;
+
+        .token {
+            margin-left: .25em;
+            margin-right: .25em;
+        }
+    }
+
+    div.token {
+        width: $divW;
+        height: $divW;
+        border-radius: 50%;
+        border: solid black 1px;
+
+        &.Player1 {
+            background-color: $colorP1;
+        }
+        &.Player2 {
+            background-color: $colorP2;
+        }
+    }
+
+    table.reversi {
+        border-collapse: collapse;
+        border: solid black 2px;
+        background: green;
+
+        &.Player1 {
+            td.place.playable > div.Empty {
+                background-color: $colorP1;
+            }
+        }
+
+        &.Player2 {
+            td.place.playable > div.Empty {
+                background-color: $colorP2;
+            }
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            width: $borderW;
+            height: $borderW;
+            background-color: burlywood;
+            perspective: 800px;
+
+            &.place {
+                border: 1px solid black;
+                width: $W;
+                height: $W;
+                background-color: inherit;
+                cursor: pointer;
+
+                &.playable {
+                    > div.Empty {
+                        border: none; // solid black 1px;
+                        background-color: lightblue;
+                        width:  calc($divW / 3);
+                        height: calc($divW / 3);
+                        transition: none;
+                        transform: rotateY(0deg);
+                        display: block;
+                    }
+                }
+
+                > div {
+                    width: $divW;
+                    height: $divW;
+                    border-radius: 50%;
+                    border: solid black 1px;
+                    margin: auto;
+                    transition: background-color $t, transform $t;
+                    display: none;
+
+                    &.Empty {
+                        border: none;
+                        background-color: none;
+                        transform: rotateY(90deg);
+                    }
+
+                    &.Player1 {
+                        background-color: $colorP1;
+                        transform: rotateY(0deg);
+                        display: block;
+                    }
+
+                    &.Player2 {
+                        background-color: $colorP2;
+                        transform: rotateY(180deg);
+                        display: block;
+                    }
+
+                }
+            }
+        }
+    }
+}

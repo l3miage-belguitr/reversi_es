@@ -1,0 +1,24 @@
+<h1>Reversi en Angular</h1>
+
+<table class="reversi" [ngClass]="{'Player1': gs().gameState.turn === 'Player1', 'Player2': gs().gameState.turn === 'Player2'}">
+    <tr>
+        <td></td>
+        <td *ngFor="let i of range8()">{{i}}</td>
+    </tr>
+    <tr *ngFor="let i of range8()">
+        <td>{{i}}</td>
+        <td *ngFor="let j of [0, 1, 2, 3, 4, 5, 6, 7]" (click)="play(i, j)" class="place" [ngClass]="{'playable': this.isPlayable(i, j)}">
+            <div [ngClass]="{'Player1': case(i, j) === 'Player1', 'Player2': case(i, j) === 'Player2', 'Empty': case(i, j) === 'Empty'}"></div>
+        </td>
+    </tr>
+</table>
+
+<section class="info">
+    Au tour de <div class="token" [ngClass]="player()"></div>
+</section>
+<section class="info"> 
+    Scores : <div class="token Player1"></div>{{gs().scores.Player1}} <div class="token Player2"></div>{{gs().scores.Player2}}
+</section>
+<button (click)="restart()">
+    Recommencer
+</button>
